@@ -23,6 +23,6 @@ Coding Principles - https://en.wikipedia.org/wiki/Category:Programming_principle
 5. Extract method for decreasing sellin.
 6. Introduce constants.
 7. Move item related methods into method class.
-8. Duplicate item update code into strategies per item. Can then refactor each strategy indvidually.
-9. Refactor vest strategy.
+8. Duplicate item update code into strategies per item. Then refactor each strategy individually.
+9. Remove duplicate strategies
 
