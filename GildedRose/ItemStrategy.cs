@@ -56,69 +56,23 @@
     {
         public override void Update(Item item)
         {
-            if (item.Name != ItemNames.Cheese && item.Name != ItemNames.BackStagePass)
+            if (item.Quality > MinQuality)
+            {
+                if (item.Name != ItemNames.Sulfuras)
+                {
+                    item.DecreaseQuality();
+                }
+            }
+            
+            item.DecreaseSellIn();
+
+            if (item.SellIn < MinSellIn)
             {
                 if (item.Quality > MinQuality)
                 {
                     if (item.Name != ItemNames.Sulfuras)
                     {
                         item.DecreaseQuality();
-                    }
-                }
-            }
-            else
-            {
-                if (item.Quality < MaxQuality)
-                {
-                    item.IncreaseQuality();
-
-                    if (item.Name == ItemNames.BackStagePass)
-                    {
-                        if (item.SellIn < FirstSellInThreshold)
-                        {
-                            if (item.Quality < MaxQuality)
-                            {
-                                item.IncreaseQuality();
-                            }
-                        }
-
-                        if (item.SellIn < SecondSellInThreshold)
-                        {
-                            if (item.Quality < MaxQuality)
-                            {
-                                item.IncreaseQuality();
-                            }
-                        }
-                    }
-                }
-            }
-
-            item.DecreaseSellIn();
-
-            if (item.SellIn < MinSellIn)
-            {
-                if (item.Name != ItemNames.Cheese)
-                {
-                    if (item.Name != ItemNames.BackStagePass)
-                    {
-                        if (item.Quality > MinQuality)
-                        {
-                            if (item.Name != ItemNames.Sulfuras)
-                            {
-                                item.DecreaseQuality();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
-                }
-                else
-                {
-                    if (item.Quality < MaxQuality)
-                    {
-                        item.IncreaseQuality();
                     }
                 }
             }
