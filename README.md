@@ -24,4 +24,5 @@ Coding Principles - https://en.wikipedia.org/wiki/Category:Programming_principle
 6. Introduce constants.
 7. Move item related methods into method class.
 8. Duplicate item update code into strategies per item. Can then refactor each strategy indvidually.
+9. Refactor vest strategy.
 
