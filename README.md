@@ -16,9 +16,9 @@ Coding Principles - https://en.wikipedia.org/wiki/Category:Programming_principle
 
 # # Refactor steps
 
-1. Add single test to confirm outout is as expected.
-2. Extract all logic in the loop to method and use foreach to loop.
-3. Move item class to own file. Extract increase and decrease methods.
+1. Add single test to confirm output is as expected.
+2. Extract all logic in the loop to a new method and use a foreach to loop.
+3. Move item class to own file. Extract increase and decrease quality methods.
 4. Remove magic strings.
 5. Extract method for decreasing sellin.
 6. Introduce constants.
