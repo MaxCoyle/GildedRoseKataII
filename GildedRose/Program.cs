@@ -82,10 +82,10 @@ namespace GildedRose
 
         private static void ApplyUpdateRulesToItem(Item item)
         {
-            var itemStrategies = GetItemStrategies();
+
             ItemStrategy matchingItemStrategy = null;
 
-            foreach (var itemStrategy in itemStrategies)
+            foreach (var itemStrategy in ItemStrategies)
             {
                 if (item.Name.ToLower().Contains(itemStrategy.Key.ToLower()))
                 {
@@ -96,20 +96,15 @@ namespace GildedRose
             matchingItemStrategy?.Update(item);
         }
 
-        private static Dictionary<string, ItemStrategy> GetItemStrategies()
+        private static Dictionary<string, ItemStrategy> ItemStrategies => new Dictionary<string, ItemStrategy>
         {
-            var itemStrategies = new Dictionary<string, ItemStrategy>
-            {
-                { ItemNames.Vest, new VestItemStrategy() },
-                { ItemNames.Cheese, new CheeseItemStrategy() },
-                { ItemNames.Elixir, new ElixirItemStrategy() },
-                { ItemNames.Sulfuras, new SulfurasItemStrategy() },
-                { ItemNames.BackStagePass, new BackStageItemStrategy() },
-                { ItemNames.Cake, new CakeItemStrategy() }
-            };
-
-            return itemStrategies;
-        }   
+            { ItemNames.Vest, new DecreasingItemStrategy() },
+            { ItemNames.Cheese, new CheeseItemStrategy() },
+            { ItemNames.Elixir, new DecreasingItemStrategy() },
+            { ItemNames.Sulfuras, new SulfurasItemStrategy() },
+            { ItemNames.BackStagePass, new BackStageItemStrategy() },
+            { ItemNames.Cake, new DecreasingItemStrategy() }
+        };
 
         private static void AppendToOutputString(string line)
         {
@@ -117,5 +112,4 @@ namespace GildedRose
             ConsoleOutputString += "\r\n";
         }
     };
-
 }

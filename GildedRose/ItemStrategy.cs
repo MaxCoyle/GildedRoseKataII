@@ -10,27 +10,6 @@
         public abstract void Update(Item item);
     }
 
-    public class VestItemStrategy : ItemStrategy
-    {
-        public override void Update(Item item)
-        {
-            if (item.Quality > MinQuality)
-            {
-                item.DecreaseQuality();
-            }
-
-            item.DecreaseSellIn();
-
-            if (item.SellIn < MinSellIn)
-            {
-                if (item.Quality > MinQuality)
-                {
-                    item.DecreaseQuality();
-                }
-            }
-        }
-    }
-
     public class CheeseItemStrategy : ItemStrategy
     {
         public override void Update(Item item)
@@ -47,30 +26,6 @@
                 if (item.Quality < MaxQuality)
                 {
                     item.IncreaseQuality();
-                }
-            }
-        }
-    }
-
-    public class ElixirItemStrategy : ItemStrategy
-    {
-        public override void Update(Item item)
-        {
-            if (item.Quality > MinQuality)
-            {
-                if (item.Name != ItemNames.Sulfuras)
-                {
-                    item.DecreaseQuality();
-                }
-            }
-            
-            item.DecreaseSellIn();
-
-            if (item.SellIn < MinSellIn)
-            {
-                if (item.Quality > MinQuality)
-                {
-                    item.DecreaseQuality();
                 }
             }
         }
@@ -122,28 +77,6 @@
             if (item.SellIn < MinSellIn)
             {
                 item.Quality = item.Quality - item.Quality;
-            }
-        }
-    }
-
-    public class CakeItemStrategy : ItemStrategy
-    {
-        public override void Update(Item item)
-        {
-            if (item.Quality > MinQuality)
-            {
-                item.DecreaseQuality();
-            }
-            
-            item.DecreaseSellIn();
-
-            if (item.SellIn < MinSellIn)
-            {
-                if (item.Quality > MinQuality)
-                {
-                    item.DecreaseQuality();
-                
-                }
             }
         }
     }
