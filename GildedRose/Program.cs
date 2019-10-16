@@ -11,6 +11,15 @@ namespace GildedRose
     {
         public static string ConsoleOutputString { get; set; }
         private IList<Item> _items;
+        private static Dictionary<string, ItemStrategy> ItemStrategies => new Dictionary<string, ItemStrategy>
+        {
+            { ItemNames.Vest, new DecreasingItemStrategy() },
+            { ItemNames.Cheese, new CheeseItemStrategy() },
+            { ItemNames.Elixir, new DecreasingItemStrategy() },
+            { ItemNames.Sulfuras, new SulfurasItemStrategy() },
+            { ItemNames.BackStagePass, new BackStageItemStrategy() },
+            { ItemNames.Cake, new DecreasingItemStrategy() }
+        };
 
         private static void Main(string[] args)
         {
@@ -25,35 +34,7 @@ namespace GildedRose
 
             var app = new Program()
             {
-                _items = new List<Item>
-                {
-                    new Item {Name = ItemNames.Vest, SellIn = 10, Quality = 20},
-                    new Item {Name = ItemNames.Cheese, SellIn = 2, Quality = 0},
-                    new Item {Name = ItemNames.Elixir, SellIn = 5, Quality = 7},
-                    new Item {Name = ItemNames.Sulfuras, SellIn = 0, Quality = 80},
-                    new Item {Name = ItemNames.Sulfuras, SellIn = -1, Quality = 80},
-                    new Item
-                    {
-                        Name = ItemNames.BackStagePass,
-                        SellIn = 15,
-                        Quality = 20
-                    },
-                    new Item
-                    {
-                        Name = ItemNames.BackStagePass,
-                        SellIn = 10,
-                        Quality = 49
-                    },
-                    new Item
-                    {
-                        Name = ItemNames.BackStagePass,
-                        SellIn = 5,
-                        Quality = 49
-                    },
-                    // this conjured item does not work properly yet
-                    new Item {Name = ItemNames.Cake, SellIn = 3, Quality = 6}
-                }
-
+                _items = ItemList.Get()
             };
 
             for (var i = 0; i < 31; i++)
@@ -69,7 +50,6 @@ namespace GildedRose
                 AppendToOutputString("");
                 app.UpdateQuality();
             }
-
         }
 
         private void UpdateQuality()
@@ -82,7 +62,6 @@ namespace GildedRose
 
         private static void ApplyUpdateRulesToItem(Item item)
         {
-
             ItemStrategy matchingItemStrategy = null;
 
             foreach (var itemStrategy in ItemStrategies)
@@ -95,16 +74,6 @@ namespace GildedRose
 
             matchingItemStrategy?.Update(item);
         }
-
-        private static Dictionary<string, ItemStrategy> ItemStrategies => new Dictionary<string, ItemStrategy>
-        {
-            { ItemNames.Vest, new DecreasingItemStrategy() },
-            { ItemNames.Cheese, new CheeseItemStrategy() },
-            { ItemNames.Elixir, new DecreasingItemStrategy() },
-            { ItemNames.Sulfuras, new SulfurasItemStrategy() },
-            { ItemNames.BackStagePass, new BackStageItemStrategy() },
-            { ItemNames.Cake, new DecreasingItemStrategy() }
-        };
 
         private static void AppendToOutputString(string line)
         {
