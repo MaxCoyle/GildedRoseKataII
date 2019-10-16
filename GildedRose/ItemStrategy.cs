@@ -35,20 +35,20 @@
     {
         public override void Update(Item item)
         {
-            //if (item.Quality < MaxQuality)
-            //{
-            //    item.IncreaseQuality();
-            //}
+            if (item.Quality < MaxQuality)
+            {
+                item.IncreaseQuality();
+            }
 
-            //item.DecreaseSellIn();
+            item.DecreaseSellIn();
 
-            //if (item.SellIn < MinSellIn)
-            //{
-            //    if (item.Quality < MaxQuality)
-            //    {
-            //        item.IncreaseQuality();
-            //    }
-            //}
+            if (item.SellIn < MinSellIn)
+            {
+                if (item.Quality < MaxQuality)
+                {
+                    item.IncreaseQuality();
+                }
+            }
         }
     }
 
